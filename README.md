@@ -23,9 +23,6 @@ work in Sublime Text. Fresh is the target editor, though.
 This is still a tiny, practical language pack rather than a perfect language
 definition.
 
-- `package.json` still lists `.ext` as the Fresh extension mapping. The grammar
-  itself knows the SuperBASIC extensions above, but the package manifest should
-  be updated before publishing.
 - The Fresh language comment prefix is currently `//`, which is a placeholder.
   SuperBASIC comments are highlighted as `'` and `REM`.
 - The LSP entry points at `language-server`, also as a placeholder. There is no

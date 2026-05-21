@@ -9,7 +9,7 @@
   "fresh": {
     "grammar": {
       "file": "grammars/syntax.sublime-syntax",
-      "extensions": ["ext"]
+      "extensions": ["bas", "sbas", "sb", "superbasic"]
     },
     "language": {
       "commentPrefix": "//",
