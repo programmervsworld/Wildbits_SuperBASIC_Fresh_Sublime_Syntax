@@ -1,0 +1,25 @@
+{
+  "$schema": "https://raw.githubusercontent.com/sinelaw/fresh/main/crates/fresh-editor/plugins/schemas/package.schema.json",
+  "name": "superbasic",
+  "version": "0.1.0",
+  "description": "Attempt to make a fresh language pack for the F256K2s SuperBasic language",
+  "type": "language",
+  "author": "ProgrammerVsWorld",
+  "license": "MIT",
+  "fresh": {
+    "grammar": {
+      "file": "grammars/syntax.sublime-syntax",
+      "extensions": ["ext"]
+    },
+    "language": {
+      "commentPrefix": "//",
+      "tabSize": 4,
+      "autoIndent": true
+    },
+    "lsp": {
+      "command": "language-server",
+      "args": ["--stdio"],
+      "autoStart": true
+    }
+  }
+}

@@ -1,0 +1,105 @@
+%YAML 1.2
+---
+name: SuperBASIC
+file_extensions:
+  - bas
+  - sb
+  - sbas
+  - superbasic
+scope: source.superbasic
+
+contexts:
+  main:
+    - include: comments
+    - include: strings
+    - include: line-numbers
+    - include: numbers
+    - include: labels
+    - include: functions
+    - include: keywords
+    - include: assembly
+    - include: operators
+    - include: identifiers
+
+  comments:
+    - match: "'"
+      scope: punctuation.definition.comment.superbasic
+      push:
+        - meta_scope: comment.line.apostrophe.superbasic
+        - match: $\n?
+          pop: true
+    - match: (?i)\brem\b
+      scope: keyword.other.rem.superbasic
+      push:
+        - meta_scope: comment.line.rem.superbasic
+        - match: $\n?
+          pop: true
+
+  strings:
+    - match: '"'
+      scope: punctuation.definition.string.begin.superbasic
+      push:
+        - meta_scope: string.quoted.double.superbasic
+        - match: '""'
+          scope: constant.character.escape.quote.superbasic
+        - match: '"'
+          scope: punctuation.definition.string.end.superbasic
+          pop: true
+
+  line-numbers:
+    - match: ^\s*(\d+)
+      captures:
+        1: constant.numeric.line-number.superbasic
+
+  numbers:
+    - match: (?i)(?<![\w$#])\$[0-9a-f]+
+      scope: constant.numeric.hex.superbasic
+    - match: (?<![\w$#])[-+]?(?:\d+\.\d*|\.\d+)(?:[eE][-+]?\d+)?
+      scope: constant.numeric.float.superbasic
+    - match: (?<![\w$#])[-+]?\d+(?:[eE][-+]?\d+)?
+      scope: constant.numeric.integer.superbasic
+
+  labels:
+    - match: (?i)(^\s*|(?<=:))(\.[A-Z_][A-Z0-9_]*)
+      captures:
+        2: entity.name.label.assembly.superbasic
+
+  functions:
+    - match: (?i)\b(?:abs|alloc|asc|chr\$|event|frac|get|get\$|getdate\$|gettime\$|hit|inkey|inkey\$|int|isval|itemcount|itemget\$|joyb|joyx|joyy|keydown|left\$|len|max|min|mid\$|not|peek|peekw|peekl|peekd|playing|rnd|random|right\$|sgn|spc|str\$|tile|timer|val)(?=\s*\()
+      scope: support.function.superbasic
+
+  keywords:
+    - match: (?i)\b(?:if|then|else|endif|for|to|downto|next|repeat|until|while|wend|proc|endproc|local|return|gosub|goto|call|end|stop|run|xload|xgo|try|assert|let|dim|read|data|restore|assemble)\b
+      scope: keyword.control.superbasic
+    - match: (?i)\b(?:load|save|verify|bload|bsave|dir|drive|new|list)\b
+      scope: keyword.other.storage.superbasic
+    - match: (?i)\b(?:print|cprint|input|cursor|cls)\b
+      scope: keyword.other.io.superbasic
+    - match: (?i)\b(?:bitmap|circle|gfx|image|line|palette|plot|rect|sprite|sprites|text|char|tile|tiles)\b
+      scope: keyword.other.graphics.superbasic
+    - match: (?i)\b(?:memcopy|mdelta|mouse|poke|pokew|pokel|poked|sound|option)\b
+      scope: keyword.other.hardware.superbasic
+    - match: (?i)\b(?:ping|zap|shoot|explode)\b
+      scope: keyword.other.sound.superbasic
+    - match: (?i)\b(?:on|off|clear|at|from|here|by|solid|outline|colour|color|draw|rect|poke|image)\b
+      scope: support.constant.modifier.superbasic
+    - match: (?i)\b(?:true|false)\b
+      scope: constant.language.boolean.superbasic
+
+  assembly:
+    - match: (?i)\b(?:adc|and|asl|bcc|bcs|beq|bit|bmi|bne|bpl|bra|brk|bvc|bvs|clc|cld|cli|clv|cmp|cpx|cpy|dea|dec|dex|dey|eor|ina|inc|inx|iny|jmp|jsr|lda|ldx|ldy|lsr|nop|ora|pha|php|phx|phy|pla|plp|plx|ply|rol|ror|rti|rts|sbc|sec|sed|sei|sta|stp|stx|sty|stz|tax|tay|trb|tsb|tsx|txa|txs|tya|wai)\b
+      scope: keyword.mnemonic.65c02.superbasic
+    - match: (?i)\b(?:bbr[0-7]|bbs[0-7]|rmb[0-7]|smb[0-7])\b
+      scope: keyword.mnemonic.65c02.superbasic
+
+  operators:
+    - match: <<|>>|<=|>=|<>|[+\-*/\\%=<>&^|@!?]
+      scope: keyword.operator.superbasic
+    - match: ':'
+      scope: punctuation.separator.statement.superbasic
+    - match: '[(),;]'
+      scope: punctuation.separator.superbasic
+
+  identifiers:
+    - match: (?i)\b[A-Z_][A-Z0-9_]*(?:[$#]|\()?
+      scope: variable.other.superbasic
