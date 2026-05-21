@@ -1,62 +1,89 @@
-# Wildbits F256K2 Syntax File For Fresh TUI 
+# SuperBASIC Language Pack for Fresh
 
-This is my attempt to make a fresh language pack for the F256K2s SuperBasic language. In theory this is a sublime YAML format so it might work for sublime text as well though I haven't tried. The idea is just to provide some syntax highlighting features for SuperBasic so I don't have to start at all white in the editor :)
+A small Fresh language pack for writing Foenix F256K2 SuperBASIC without staring
+at a wall of plain white text. It is not a full IDE, but it does know enough
+SuperBASIC to make programs easier to scan while you poke at retro hardware and
+pretend the bugs are period-correct.
 
-## Features
+The grammar is written in Sublime's `.sublime-syntax` YAML format, so it may also
+work in Sublime Text. Fresh is the target editor, though.
 
-- Syntax highlighting via Sublime syntax grammar
-- Language configuration (comments, indentation)
-- LSP integration (if configured)
+## What It Does
+
+- Highlights SuperBASIC keywords, functions, operators, labels, numbers, and
+  strings.
+- Highlights comments written with `'` or `REM`.
+- Recognizes common SuperBASIC file extensions in the grammar:
+  `.bas`, `.sb`, `.sbas`, and `.superbasic`.
+- Includes 65C02 mnemonics for inline assembly blocks.
+- Provides a Fresh package manifest so the grammar can be installed locally.
+
+## Current Rough Edges
+
+This is still a tiny, practical language pack rather than a perfect language
+definition.
+
+- `package.json` still lists `.ext` as the Fresh extension mapping. The grammar
+  itself knows the SuperBASIC extensions above, but the package manifest should
+  be updated before publishing.
+- The Fresh language comment prefix is currently `//`, which is a placeholder.
+  SuperBASIC comments are highlighted as `'` and `REM`.
+- The LSP entry points at `language-server`, also as a placeholder. There is no
+  SuperBASIC language server bundled here.
 
 ## Installation
-See: https://getfresh.dev/docs/plugins/development/language-packs#testing-with-local-path-recommended
-### Now
-1. Ctrl-P
-2. Find Package Install From URL
-3. Enter full path to this repo
-4. Reopen fresh
 
-### Eventually
-(This won't work until you submit a PR into fresh's repo)
-Install via Fresh's package manager:
-```
+For local testing in Fresh, use Fresh's package-from-URL flow:
+
+1. Open the command palette with `Ctrl-P`.
+2. Choose `Package Install From URL`.
+3. Enter the full local path to this repository.
+4. Restart or reopen Fresh if the grammar does not show up immediately.
+
+Fresh's language-pack development docs cover the same workflow:
+https://getfresh.dev/docs/plugins/development/language-packs#testing-with-local-path-recommended
+
+Once this package is published through Fresh's package registry, installation
+should eventually look like this:
+
+```text
 :pkg install superbasic
 ```
 
-## Configuration
+That command is future tense. For now, local path install is the useful bit.
 
-This language pack provides:
+## Files
 
-### Grammar
-- File extensions: `.ext` (update in package.json)
-- Syntax highlighting rules in `grammars/syntax.sublime-syntax`
-
-### Language Settings
-- Comment prefix: `//`
-- Tab size: 4 spaces
-- Auto-indent: enabled
-
-Update `package.json` to match your language's requirements.
+- `package.json` defines the Fresh package metadata.
+- `grammars/syntax.sublime-syntax` contains the SuperBASIC highlighting rules.
+- `validate.sh` validates the package manifest against Fresh's package schema.
 
 ## Development
 
-1. Edit `grammars/syntax.sublime-syntax` for syntax highlighting
-2. Update `package.json` with correct file extensions and LSP command
-3. Test by copying to `~/.config/fresh/grammars/` and restarting Fresh
+Most changes belong in `grammars/syntax.sublime-syntax`.
 
-**Tip:** Search GitHub for existing `<language> sublime-syntax` files you can adapt.
-If using an existing grammar, check its license and include a copy in `grammars/LICENSE`.
+After editing the grammar:
 
-## Grammar Attribution
+1. Reinstall or reload the local package in Fresh.
+2. Open a SuperBASIC source file.
+3. Check strings, comments, labels, numbers, keywords, and any new syntax you
+   touched.
 
-<!-- If you used an existing grammar, add attribution here: -->
-<!-- The syntax grammar is derived from [original](https://github.com/user/repo) -->
-<!-- by Original Author, licensed under MIT. See `grammars/LICENSE` for details. -->
+To validate the package manifest, install `jsonschema` for Python if needed and
+run:
 
-## Resources
+```bash
+./validate.sh
+```
 
-- [Sublime Text Syntax Documentation](https://www.sublimetext.com/docs/syntax.html)
-- [Scope Naming Conventions](https://www.sublimetext.com/docs/scope_naming.html)
+The validator downloads Fresh's current package validation script, so it needs
+network access.
+
+## Useful References
+
+- [Fresh language-pack docs](https://getfresh.dev/docs/plugins/development/language-packs)
+- [Sublime Text syntax documentation](https://www.sublimetext.com/docs/syntax.html)
+- [Sublime scope naming conventions](https://www.sublimetext.com/docs/scope_naming.html)
 
 ## License
 
