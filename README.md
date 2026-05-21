@@ -9,7 +9,7 @@ This is my attempt to make a fresh language pack for the F256K2s SuperBasic lang
 - LSP integration (if configured)
 
 ## Installation
-
+See: https://getfresh.dev/docs/plugins/development/language-packs#testing-with-local-path-recommended
 ### Now
 1. Ctrl-P
 2. Find Package Install From URL
