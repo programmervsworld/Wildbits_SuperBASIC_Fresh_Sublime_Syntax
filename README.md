@@ -10,6 +10,14 @@ Attempt to make a fresh language pack for the F256K2s SuperBasic language
 
 ## Installation
 
+### Now
+1. Ctrl-P
+2. Find Package Install From URL
+3. Enter full path to this repo
+4. Reopen fresh
+
+### Eventually
+(This won't work until you submit a PR into fresh's repo)
 Install via Fresh's package manager:
 ```
 :pkg install superbasic
@@ -27,10 +35,6 @@ This language pack provides:
 - Comment prefix: `//`
 - Tab size: 4 spaces
 - Auto-indent: enabled
-
-### LSP Server
-- Command: `language-server --stdio`
-- Auto-start: enabled
 
 Update `package.json` to match your language's requirements.
 
