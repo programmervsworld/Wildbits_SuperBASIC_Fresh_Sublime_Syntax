@@ -1,6 +1,6 @@
-# superbasic
+# Wildbits F256K2 Syntax File For Fresh TUI 
 
-Attempt to make a fresh language pack for the F256K2s SuperBasic language
+This is my attempt to make a fresh language pack for the F256K2s SuperBasic language. In theory this is a sublime YAML format so it might work for sublime text as well though I haven't tried. The idea is just to provide some syntax highlighting features for SuperBasic so I don't have to start at all white in the editor :)
 
 ## Features
 
